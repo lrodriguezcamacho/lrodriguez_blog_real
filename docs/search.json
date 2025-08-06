@@ -88,7 +88,7 @@
     "href": "index.html",
     "title": "quartoCourseBlog",
     "section": "",
-    "text": "I am trying this out\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExample assignment\n\n\n\ngoals\n\ngeneral\n\n\n\n\n\n\n\n\n\nOct 21, 2022\n\n\nMatt Crump\n\n\n\n\n\n\n\n\n\n\n\n\nMy First post\n\n\n\ngoals\n\ngeneral\n\n\n\n\n\n\n\n\n\nOct 21, 2022\n\n\nMatt Crump\n\n\n\n\n\nNo matching items"
+    "text": "I am trying this out\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMy First post\n\n\n\ngoals\n\ngeneral\n\n\n\n\n\n\n\n\n\nJun 8, 2025\n\n\nLuz RC\n\n\n\n\n\n\n\n\n\n\n\n\nExample assignment\n\n\n\ngoals\n\ngeneral\n\n\n\n\n\n\n\n\n\nOct 21, 2022\n\n\nMatt Crump\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/Example_assignment/index.html",
@@ -123,6 +123,6 @@
     "href": "about.html",
     "title": "About this page",
     "section": "",
-    "text": "The content on this page is from about.qmd. Edit that file to change how this page looks.\n“About” pages are special quarto template pages, with multiple options: https://quarto.org/docs/websites/website-about.html.\nTry changing the template type from jolla to one of the other options for a different look and feel."
+    "text": "The content on this page is from about.qmd. Edit that file to change how this page looks.\nIntroduction\nmethods\ndata source\npackages used\napproach"
   }
 ]
