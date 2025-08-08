@@ -7,31 +7,45 @@ categories: [goals,general]
 
 # Introduction
 
-The gender pay gap is problem any where in the world where women are constantly earning less than men. Despite a lot of progress that has been made by a lot of countries, this continue to be a problem. We would take a look at how the U.S. has combated the gender pay gap by taking a look over a time frame of 1988 to 2023. We would also take a look to see how the gender pay gap is based on racial/ethnic groups. This to allow us to answer the question if men are constantly earning more than women withing each racial/ ethnic group - or are there any exceptions?
+The gender pay gap is a global issue, with women consistently earning less than men. Despite significant progress made by many countries, this continues to be a persistent problem. In this project, we will examine how the United States has addressed the gender pay gap over the period from 1988 to 2023. Additionally, we will explore how the pay gap varies across different racial and ethnic groups. This will help us answer the question: Do men consistently earn more than women within each racial/ethnic group, or are there any exceptions?
 
 ## Prediction
 
-Based on personal knowledge I am assuming that across all racial groups men earn higher than women regardless of their ethnic or racial background.
+Based on personal knowledge, I assume that men earn more than women across all racial and ethnic groups, regardless of background.
 
 ## Data Source
 
-The data was derived from a data set from [Kaggle](https://www.kaggle.com/datasets) which was then obtain from the U.S. Department of Labor
+The data used in this project was obtained from a dataset on [Kaggle](https://www.kaggle.com/datasets), originally sourced from the U.S. Department of Labor.
 
 # Approach
 
-This data set provides information on the median annual salaries in the United States, broken down by race and sex, from 1988 to 2023. The collection of the data based on the owner of the data set on keggle was downloaded from the official website of U.S. Department of Labor and after removing the initial years - which did not contain salaries from some ethnic groups, they were reorganized in order to be better accessible and better for usable analyses.
+The data set provides information on median annual salaries in the United States, broken down by race and sex, from 1988 to 2023. According to the data set owner on Kaggle, the data was downloaded from the official website of the U.S. Department of Labor. Early years that did not include salary data for certain ethnic groups were removed. The data set was then reorganized to improve accessibility and analytical usability.
 
-The variables included in the data set are the following: Year, Salary, Sex - Man and Women, and Race/Ethnicity - Asian, White, Black, and Hispanic
+The variables in the data set include:
+
+-   **Year**
+
+-   **Salary**
+
+-   **Sex** (Male and Female)
+
+-   **Race/Ethnicity** (Asian, White, Black, and Hispanic)\
 
 # Tools
 
-The tools used for this project were the following R and RStudio in Posit.Cloud; GitHub for website hosting and the package of tidyverse
+The tools used for this project include:
+
+-   **R** and **RStudio** on Posit Cloud
+
+-   **GitHub** for website hosting
+
+-   The **tidyverse** package for data analysis and visualization\
 
 # Approach/Predictions
 
-In order to be able to answer the question if men are constantly earning more than women withing each racial/ethnic group - or are there any exceptions? We would create different graphs that would allow us to visualize the differences within each racial/ethnic groups and sex and how doe that reflect their on the salary. As well as being able to see the correlation of the salary between race/ethnicity and women as well as for men. Lastly, we would create a graph that will show the whether white women earn higher compared non white men.
+To answer the question of whether men consistently earn more than women within each racial/ethnic group, and to identify any exceptions, we will create a series of visualizations. These graphs will help us compare salaries within each racial/ethnic and gender group and reveal how gender and race/ethnicity correlate with income levels. Additionally, we will produce a graph comparing the earnings of white women to those of non-white men.
 
-Based on all of this, I am predicting that white man will earn higher across all racial/ethnic group and compared to women.
+Based on this analysis, my prediction is that white men will earn more than individuals in any other racial/ethnic or gender group.
 
 # Results
 
@@ -153,26 +167,26 @@ ggplot(salarydata_asianwomen, aes(
   
 ```
 
-![](/Overall_Graph_Across_All_Groups.png) x = Year, y = salary, color = ethnicity))+ geom_line()+ geom_point()+ labs(title ="Race/Ethnicity Pay Gap Within Men", x = "Year", y = "Salary", color = "Race/Ethnicity")+ theme_linedraw()
+![Comparison of earning between men and women across all racial and ethnic groups.](/Overall_Graph_Across_All_Groups.png) x = Year, y = salary, color = ethnicity))+ geom_line()+ geom_point()+ labs(title ="Race/Ethnicity Pay Gap Within Men", x = "Year", y = "Salary", color = "Race/Ethnicity")+ theme_linedraw()
 
-This graph allow us to see that across all racial/ethnic groups men still earn higher than women. It also allows us to see that compare to the other race/ethnicity Asian men tend to earn higher than everyone else.
+*This graph compares earnings between men and women across all racial and ethnic groups, showing that men consistently earn more than women, with Asian men earning the highest overall.*
 
 ![Race/Ethnicity Wage Gap between Women](/Race_Ethnicity_Pay_Gap_Women.png)
 
-This graphs allow us to see that across all racial/ethnic groups of just women. It allow us to see that Asian women earn higher compared to the rest of women within each of their race/ethnicity group.
+*This graph displays the median earnings of women across different racial and ethnic groups, highlighting that Asian women consistently earn more than women in other groups.*
 
 ![Race/Ethnicity Wage Gap between Men](/RaceEthnicity_paygap_Men.png)
 
-This graphs allow us to see that across all racial/ethnic groups of just men. It allow us to see that Asian men earn higher compared to the rest of men within each of their race/ethnicity group.
+*This graph shows the median earnings of men across various racial and ethnic groups, with Asian men earning the highest compared to men from other groups.*
 
-![Salary Comparision between Non White Man and White Women](/SalaryComparison_NonWhiteMen_WhiteWomen.png)
+![Salary Comparison between Non White Man and White Women](/SalaryComparison_NonWhiteMen_WhiteWomen.png)
 
-This graph allow us to see that fro the past decade White women median salary has been increasing to be higher than Black men and Hispanic men but the there is still a big gap between Asian men.
+*This graph shows that over the past decade, White women’s median salary has risen above that of Black and Hispanic men, though a significant gap remains between them and Asian men.*
 
-![Salary Comparision between Men and Asian Women](/Salary_Comparison_Men_AsianWomen.png)
+![Salary Comparison between Men and Asian Women](/Salary_Comparison_Men_AsianWomen.png)
 
-I decided to create this graph after the first graph, since it made me realize that at some point Asian women have earned higher than White men, this graph goes into detail to see this comparison. As we can see Asian man still earn higher than everyone else but Asian women have started to earn higher than White man since 2020.
+*I created this graph to explore the surprising trend observed in the first graph. This graph was created to examine the trend observed in the initial analysis, showing that since 2020, the median salary of Asian women has surpassed that of White men, while Asian men have consistently maintained the highest earnings overall.*
 
-# Discussion 
+# Discussion
 
-The data allow for me to be able to create different types in order for me to be able to answer my initial question of whether man earn higher across all racial/ethnic groups. Across the findings we were able to see that yes, man earn higher than women across all racial/ethnic groups but to my surprise I was able to find that Asian men and Asian women earn higher than White man. This was surprising to me since I would always hear White man earning higher across all racial and ethnic groups and women.
+The data confirm that men generally earn more than women across all racial and ethnic groups. Surprisingly, Asian men and women both earn more than White men, challenging the common belief that White men have the highest earnings.

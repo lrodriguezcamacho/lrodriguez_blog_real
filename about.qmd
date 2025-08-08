@@ -14,15 +14,3 @@ about:
       text: Github
       href: https://github.com
 ---
-
-The content on this page is from `about.qmd`. Edit that file to change how this page looks.
-
-Introduction
-
-methods
-
-data source
-
-packages used
-
-approach
