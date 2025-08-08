@@ -94,12 +94,6 @@ salary_data_filter <- salarydata |> filter(ethnicity != "Total")
         x = "Year", color = "Gender")+
    theme_minimal()
 
-ggplot(salary_data_filter, mapping = aes( x= Year, y = salary,
-                                          color=gender))+
-  geom_line()+
-  geom_point()+
-  facet_wrap(~ethnicity)
-
 # To create a filter of Non White Males vs White women 
 
 salarydata_whitewomen <- salary_data_filter |> filter((
