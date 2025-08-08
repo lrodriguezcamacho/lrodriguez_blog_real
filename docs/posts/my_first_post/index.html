@@ -237,7 +237,7 @@ salary_data_filter &lt;- salarydata |&gt; filter(ethnicity != "Total")
    geom_line()+
    geom_point()+
    facet_wrap(~ethnicity) +
-   labs(title = "Gender Pay Gap Across Racial/Ethnic Groups in the U.S. Over Time 1988 to 2023",
+   labs(title = "Gender Pay Gap by Racial/Ethnic Groups in the U.S. 1988 - 2023",
         y = "Salary",
         x = "Year", color = "Gender")+
    theme_minimal()
@@ -310,9 +310,13 @@ ggplot(salarydata_asianwomen, aes(
   labs(title = "Salary Comparison: Men vs Asian Women", x = "Year",
        y = "Salary", color = "Gender &amp; Race/Ethnicity")+
   theme_linedraw()
-  
   </code></pre>
-<p><img src="../../Overall_Graph_Across_All_Groups.png" class="img-fluid" alt="Comparison of earning between men and women across all racial and ethnic groups."> x = Year, y = salary, color = ethnicity))+ geom_line()+ geom_point()+ labs(title =“Race/Ethnicity Pay Gap Within Men”, x = “Year”, y = “Salary”, color = “Race/Ethnicity”)+ theme_linedraw()</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../UpdatedGenderPayGAP.png" class="img-fluid figure-img"></p>
+<figcaption>Comparison of earning between men and women across all racial and ethnic groups.</figcaption>
+</figure>
+</div>
 <p><em>This graph compares earnings between men and women across all racial and ethnic groups, showing that men consistently earn more than women, with Asian men earning the highest overall.</em></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

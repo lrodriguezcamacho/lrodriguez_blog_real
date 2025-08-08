@@ -36,7 +36,7 @@ salary_data_filter <- salarydata |> filter(ethnicity != "Total")
    geom_line()+
    geom_point()+
    facet_wrap(~ethnicity) +
-   labs(title = "Gender Pay Gap Across Racial/Ethnic Groups in the U.S. Over Time 1988 to 2023",
+   labs(title = "Gender Pay Gap by Racial/Ethnic Groups in the U.S. 1988 - 2023",
         y = "Salary",
         x = "Year", color = "Gender")+
    theme_minimal()
