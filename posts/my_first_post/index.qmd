@@ -119,12 +119,10 @@ ggplot(salarydata_whitewomen, aes(
 #To create a filter of Women only
 
 salarydata_women <- salary_data_filter |> filter(gender == "Women")
-#salarydata_women
 
 #To create a filter of Men only
 
 salarydata_men <- salary_data_filter |> filter(gender == "Men")
-#salarydata_men
 
 #To create a plot for women pay gap across groups 
 
