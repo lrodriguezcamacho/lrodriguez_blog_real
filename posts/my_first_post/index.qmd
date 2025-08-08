@@ -52,6 +52,7 @@ Based on this analysis, my prediction is that white men will earn more than indi
 ## Code
 
 ```{r}
+#| paged-print: false
 library(tidyverse)
 salarydata <- read.csv("../../salary_bras.csv")
 
@@ -93,6 +94,41 @@ salary_data_filter <- salarydata |> filter(ethnicity != "Total")
         y = "Salary",
         x = "Year", color = "Gender")+
    theme_minimal()
+ 
+ #This graph compares earnings between men and women across all racial and ethnic groups, showing that men consistently earn more than women, with Asian men earning the highest overall.
+
+
+#To create a filter of Women only
+
+salarydata_women <- salary_data_filter |> filter(gender == "Women")
+
+#To create a filter of Men only
+
+salarydata_men <- salary_data_filter |> filter(gender == "Men")
+
+#To create a graph for women pay gap across groups 
+
+ggplot(salarydata_women, aes(
+  x = Year, y = salary, color = ethnicity))+
+  geom_line()+
+  geom_point()+
+  labs(title ="Race/Ethnicity Pay Gap Within Women", x = "Year", y = "Salary",
+       color = "Race/Ethnicity")+
+  theme_linedraw()
+
+#This graph displays the median earnings of women across different racial and ethnic groups, highlighting that Asian women consistently earn more than women in other groups
+
+#To make a graph to show the pay gap within men 
+
+ggplot(salarydata_men, aes(
+  x = Year, y = salary, color = ethnicity))+
+  geom_line()+
+  geom_point()+
+  labs(title ="Race/Ethnicity Pay Gap Within Men", x = "Year", y = "Salary",
+       color = "Race/Ethnicity")+
+  theme_linedraw()
+
+#This graph shows the median earnings of men across various racial and ethnic groups, with Asian men earning the highest compared to men from other groups.
 
 # To create a filter of Non White Males vs White women 
 
@@ -110,33 +146,7 @@ ggplot(salarydata_whitewomen, aes(
        y = "Salary", color = "Gender & Race/Ethnicity")+
   theme_linedraw()
 
-#To create a filter of Women only
-
-salarydata_women <- salary_data_filter |> filter(gender == "Women")
-
-#To create a filter of Men only
-
-salarydata_men <- salary_data_filter |> filter(gender == "Men")
-
-#To create a plot for women pay gap across groups 
-
-ggplot(salarydata_women, aes(
-  x = Year, y = salary, color = ethnicity))+
-  geom_line()+
-  geom_point()+
-  labs(title ="Race/Ethnicity Pay Gap Within Women", x = "Year", y = "Salary",
-       color = "Race/Ethnicity")+
-  theme_linedraw()
-
-#To make a graph to show the pay gap within men 
-
-ggplot(salarydata_men, aes(
-  x = Year, y = salary, color = ethnicity))+
-  geom_line()+
-  geom_point()+
-  labs(title ="Race/Ethnicity Pay Gap Within Men", x = "Year", y = "Salary",
-       color = "Race/Ethnicity")+
-  theme_linedraw()
+#This graph shows that over the past decade, White women’s median salary has risen above that of Black and Hispanic men, though a significant gap remains between them and Asian men.
 
 
 # To create a filter of Men vs Asian women 
@@ -153,29 +163,11 @@ ggplot(salarydata_asianwomen, aes(
   geom_point()+
   labs(title = "Salary Comparison: Men vs Asian Women", x = "Year",
        y = "Salary", color = "Gender & Race/Ethnicity")+
-  theme_linedraw()
+  theme_linedraw() 
+
+#I created this graph to explore the surprising trend observed in the first graph. This graph was created to examine the trend observed in the initial analysis, showing that since 2020, the median salary of Asian women has surpassed that of White men, while Asian men have consistently maintained the highest earnings overall.
   
 ```
-
-![Comparison of earning between men and women across all racial and ethnic groups.](/UpdatedGenderPayGAP.png)
-
-*This graph compares earnings between men and women across all racial and ethnic groups, showing that men consistently earn more than women, with Asian men earning the highest overall.*
-
-![Race/Ethnicity Wage Gap between Women](/Race_Ethnicity_Pay_Gap_Women.png)
-
-*This graph displays the median earnings of women across different racial and ethnic groups, highlighting that Asian women consistently earn more than women in other groups.*
-
-![Race/Ethnicity Wage Gap between Men](/RaceEthnicity_paygap_Men.png)
-
-*This graph shows the median earnings of men across various racial and ethnic groups, with Asian men earning the highest compared to men from other groups.*
-
-![Salary Comparison between Non White Man and White Women](/SalaryComparison_NonWhiteMen_WhiteWomen.png)
-
-*This graph shows that over the past decade, White women’s median salary has risen above that of Black and Hispanic men, though a significant gap remains between them and Asian men.*
-
-![Salary Comparison between Men and Asian Women](/Salary_Comparison_Men_AsianWomen.png)
-
-*I created this graph to explore the surprising trend observed in the first graph. This graph was created to examine the trend observed in the initial analysis, showing that since 2020, the median salary of Asian women has surpassed that of White men, while Asian men have consistently maintained the highest earnings overall.*
 
 # Discussion
 

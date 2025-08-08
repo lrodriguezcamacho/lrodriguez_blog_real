@@ -295,21 +295,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To create a filter of Non White Males vs White women </span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#This graph compares earnings between men and women across all racial and ethnic groups, showing that men consistently earn more than women, with Asian men earning the highest overall.</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>salarydata_whitewomen <span class="ot">&lt;-</span> salary_data_filter <span class="sc">|&gt;</span> <span class="fu">filter</span>((</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  gender <span class="sc">==</span> <span class="st">"Men"</span> <span class="sc">&amp;</span> ethnicity <span class="sc">!=</span> <span class="st">"White"</span>) <span class="sc">|</span> (</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    gender <span class="sc">==</span> <span class="st">"Women"</span> <span class="sc">&amp;</span> ethnicity <span class="sc">==</span> <span class="st">"White"</span>))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The creation of the plot of the comparison</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salarydata_whitewomen, <span class="fu">aes</span>(</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span>Year, <span class="at">y=</span>salary, <span class="at">color =</span> <span class="fu">interaction</span>(gender, ethnicity)))<span class="sc">+</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Salary Comparison: Men (Non-White) vs White Women"</span>, <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Salary"</span>, <span class="at">color =</span> <span class="st">"Gender &amp; Race/Ethnicity"</span>)<span class="sc">+</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#To create a filter of Women only</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>salarydata_women <span class="ot">&lt;-</span> salary_data_filter <span class="sc">|&gt;</span> <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">"Women"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#To create a filter of Men only</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>salarydata_men <span class="ot">&lt;-</span> salary_data_filter <span class="sc">|&gt;</span> <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">"Men"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#To create a graph for women pay gap across groups </span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salarydata_women, <span class="fu">aes</span>(</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> Year, <span class="at">y =</span> salary, <span class="at">color =</span> ethnicity))<span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Race/Ethnicity Pay Gap Within Women"</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Salary"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Race/Ethnicity"</span>)<span class="sc">+</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -317,23 +322,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To create a filter of Women only</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This graph displays the median earnings of women across different racial and ethnic groups, highlighting that Asian women consistently earn more than women in other groups</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>salarydata_women <span class="ot">&lt;-</span> salary_data_filter <span class="sc">|&gt;</span> <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">"Women"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#To make a graph to show the pay gap within men </span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#To create a filter of Men only</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>salarydata_men <span class="ot">&lt;-</span> salary_data_filter <span class="sc">|&gt;</span> <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">"Men"</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#To create a plot for women pay gap across groups </span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salarydata_women, <span class="fu">aes</span>(</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> Year, <span class="at">y =</span> salary, <span class="at">color =</span> ethnicity))<span class="sc">+</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Race/Ethnicity Pay Gap Within Women"</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Salary"</span>,</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Race/Ethnicity"</span>)<span class="sc">+</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salarydata_men, <span class="fu">aes</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> Year, <span class="at">y =</span> salary, <span class="at">color =</span> ethnicity))<span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Race/Ethnicity Pay Gap Within Men"</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Salary"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Race/Ethnicity"</span>)<span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -341,15 +340,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To make a graph to show the pay gap within men </span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This graph shows the median earnings of men across various racial and ethnic groups, with Asian men earning the highest compared to men from other groups.</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salarydata_men, <span class="fu">aes</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> Year, <span class="at">y =</span> salary, <span class="at">color =</span> ethnicity))<span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span><span class="st">"Race/Ethnicity Pay Gap Within Men"</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Salary"</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Race/Ethnicity"</span>)<span class="sc">+</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># To create a filter of Non White Males vs White women </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>salarydata_whitewomen <span class="ot">&lt;-</span> salary_data_filter <span class="sc">|&gt;</span> <span class="fu">filter</span>((</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  gender <span class="sc">==</span> <span class="st">"Men"</span> <span class="sc">&amp;</span> ethnicity <span class="sc">!=</span> <span class="st">"White"</span>) <span class="sc">|</span> (</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    gender <span class="sc">==</span> <span class="st">"Women"</span> <span class="sc">&amp;</span> ethnicity <span class="sc">==</span> <span class="st">"White"</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The creation of the plot of the comparison</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salarydata_whitewomen, <span class="fu">aes</span>(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span>Year, <span class="at">y=</span>salary, <span class="at">color =</span> <span class="fu">interaction</span>(gender, ethnicity)))<span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Salary Comparison: Men (Non-White) vs White Women"</span>, <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Salary"</span>, <span class="at">color =</span> <span class="st">"Gender &amp; Race/Ethnicity"</span>)<span class="sc">+</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -357,21 +364,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To create a filter of Men vs Asian women </span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This graph shows that over the past decade, White women’s median salary has risen above that of Black and Hispanic men, though a significant gap remains between them and Asian men.</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>salarydata_asianwomen <span class="ot">&lt;-</span> salary_data_filter <span class="sc">|&gt;</span> <span class="fu">filter</span>((</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  gender <span class="sc">==</span> <span class="st">"Men"</span>) <span class="sc">|</span> (</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    gender <span class="sc">==</span> <span class="st">"Women"</span> <span class="sc">&amp;</span> ethnicity <span class="sc">==</span> <span class="st">"Asian"</span>))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The creation of the plot of the comparison</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salarydata_asianwomen, <span class="fu">aes</span>(</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span>Year, <span class="at">y=</span>salary, <span class="at">color =</span> <span class="fu">interaction</span>(gender, ethnicity)))<span class="sc">+</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Salary Comparison: Men vs Asian Women"</span>, <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Salary"</span>, <span class="at">color =</span> <span class="st">"Gender &amp; Race/Ethnicity"</span>)<span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To create a filter of Men vs Asian women </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>salarydata_asianwomen <span class="ot">&lt;-</span> salary_data_filter <span class="sc">|&gt;</span> <span class="fu">filter</span>((</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  gender <span class="sc">==</span> <span class="st">"Men"</span>) <span class="sc">|</span> (</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    gender <span class="sc">==</span> <span class="st">"Women"</span> <span class="sc">&amp;</span> ethnicity <span class="sc">==</span> <span class="st">"Asian"</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># The creation of the plot of the comparison</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salarydata_asianwomen, <span class="fu">aes</span>(</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span>Year, <span class="at">y=</span>salary, <span class="at">color =</span> <span class="fu">interaction</span>(gender, ethnicity)))<span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Salary Comparison: Men vs Asian Women"</span>, <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Salary"</span>, <span class="at">color =</span> <span class="st">"Gender &amp; Race/Ethnicity"</span>)<span class="sc">+</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -379,42 +389,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I created this graph to explore the surprising trend observed in the first graph. This graph was created to examine the trend observed in the initial analysis, showing that since 2020, the median salary of Asian women has surpassed that of White men, while Asian men have consistently maintained the highest earnings overall.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../UpdatedGenderPayGAP.png" class="img-fluid figure-img"></p>
-<figcaption>Comparison of earning between men and women across all racial and ethnic groups.</figcaption>
-</figure>
-</div>
-<p><em>This graph compares earnings between men and women across all racial and ethnic groups, showing that men consistently earn more than women, with Asian men earning the highest overall.</em></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../Race_Ethnicity_Pay_Gap_Women.png" class="img-fluid figure-img"></p>
-<figcaption>Race/Ethnicity Wage Gap between Women</figcaption>
-</figure>
-</div>
-<p><em>This graph displays the median earnings of women across different racial and ethnic groups, highlighting that Asian women consistently earn more than women in other groups.</em></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../RaceEthnicity_paygap_Men.png" class="img-fluid figure-img"></p>
-<figcaption>Race/Ethnicity Wage Gap between Men</figcaption>
-</figure>
-</div>
-<p><em>This graph shows the median earnings of men across various racial and ethnic groups, with Asian men earning the highest compared to men from other groups.</em></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../SalaryComparison_NonWhiteMen_WhiteWomen.png" class="img-fluid figure-img"></p>
-<figcaption>Salary Comparison between Non White Man and White Women</figcaption>
-</figure>
-</div>
-<p><em>This graph shows that over the past decade, White women’s median salary has risen above that of Black and Hispanic men, though a significant gap remains between them and Asian men.</em></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../Salary_Comparison_Men_AsianWomen.png" class="img-fluid figure-img"></p>
-<figcaption>Salary Comparison between Men and Asian Women</figcaption>
-</figure>
-</div>
-<p><em>I created this graph to explore the surprising trend observed in the first graph. This graph was created to examine the trend observed in the initial analysis, showing that since 2020, the median salary of Asian women has surpassed that of White men, while Asian men have consistently maintained the highest earnings overall.</em></p>
 </section>
 </section>
 <section id="discussion" class="level1">
