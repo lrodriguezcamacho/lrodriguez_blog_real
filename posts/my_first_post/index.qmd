@@ -51,9 +51,9 @@ Based on this analysis, my prediction is that white men will earn more than indi
 
 ## Code
 
-```         
+```{r}
 library(tidyverse)
-salarydata <- read.csv("salary_bras.csv")
+salarydata <- read.csv("../../salary_bras.csv")
 
 #To clean and transform the data for better use
 
