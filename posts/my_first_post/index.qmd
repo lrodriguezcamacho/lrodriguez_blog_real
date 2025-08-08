@@ -1,5 +1,5 @@
 ---
-title: "My First post"
+title: "Gender Pay Gap Across Different Racial and Ethnic Groups"
 author: "Luz RC"
 date: "2025-06-08"
 categories: [goals,general]
