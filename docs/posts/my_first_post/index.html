@@ -156,20 +156,184 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is an example first post. Whatever you write here will appear inside your post.</p>
-<p>It is possible to write lists:</p>
-<ol type="1">
-<li>One</li>
-<li>Two</li>
-<li>Three</li>
-</ol>
-<p>And make headers</p>
-<section id="this-is-a-second-level-heading" class="level2">
-<h2 class="anchored" data-anchor-id="this-is-a-second-level-heading">This is a second level heading</h2>
-<p>You can include images, and many other kinds of content.</p>
-<p>If you are using the visual editor in Rstudio you can drag images onto the editor to insert them into the document. Otherwise, you need to place the image inside of the folder for this post, and then you can insert it to your post directly, like this:</p>
-<p><img src="thumbnail.jpg" class="img-fluid"></p>
-<p>The first image in a blog post will also be used on the listings page.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>The gender pay gap is problem any where in the world where women are constantly earning less than men. Despite a lot of progress that has been made by a lot of countries, this continue to be a problem. We would take a look at how the U.S. has combated the gender pay gap by taking a look over a time frame of 1988 to 2023. We would also take a look to see how the gender pay gap is based on racial/ethnic groups. This to allow us to answer the question if men are constantly earning more than women withing each racial/ ethnic group - or are there any exceptions?</p>
+<section id="prediction" class="level2">
+<h2 class="anchored" data-anchor-id="prediction">Prediction</h2>
+<p>Based on personal knowledge I am assuming that across all racial groups men earn higher than women regardless of their ethnic or racial background.</p>
+</section>
+<section id="data-source" class="level2">
+<h2 class="anchored" data-anchor-id="data-source">Data Source</h2>
+<p>The data was derived from a data set from <a href="https://www.kaggle.com/datasets">Kaggle</a> which was then obtain from the U.S. Department of Labor</p>
+</section>
+</section>
+<section id="approach" class="level1">
+<h1>Approach</h1>
+<p>This data set provides information on the median annual salaries in the United States, broken down by race and sex, from 1988 to 2023. The collection of the data based on the owner of the data set on keggle was downloaded from the official website of U.S. Department of Labor and after removing the initial years - which did not contain salaries from some ethnic groups, they were reorganized in order to be better accessible and better for usable analyses.</p>
+<p>The variables included in the data set are the following: Year, Salary, Sex - Man and Women, and Race/Ethnicity - Asian, White, Black, and Hispanic</p>
+</section>
+<section id="tools" class="level1">
+<h1>Tools</h1>
+<p>The tools used for this project were the following R and RStudio in Posit.Cloud; GitHub for website hosting and the package of tidyverse</p>
+</section>
+<section id="approachpredictions" class="level1">
+<h1>Approach/Predictions</h1>
+<p>In order to be able to answer the question if men are constantly earning more than women withing each racial/ethnic group - or are there any exceptions? We would create different graphs that would allow us to visualize the differences within each racial/ethnic groups and sex and how doe that reflect their on the salary. As well as being able to see the correlation of the salary between race/ethnicity and women as well as for men. Lastly, we would create a graph that will show the whether white women earn higher compared non white men.</p>
+<p>Based on all of this, I am predicting that white man will earn higher across all racial/ethnic group and compared to women.</p>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<pre><code>library(tidyverse)
+salarydata &lt;- read.csv("salary_bras.csv")
+
+#To clean and transform the data for better use
+
+salarydata &lt;- gather(
+  salarydata,
+  group,
+  salary,
+  Asian.Men:White.Women,
+  factor_key = TRUE
+)
+
+
+salarydata$ethnicity &lt;- str_split_i(
+  salarydata$group,
+  "\\.",
+  1
+)
+
+salarydata$gender &lt;- str_split_i(
+  salarydata$group,
+  "\\.",
+  2
+)
+
+#To filter a data set without the total values
+
+salary_data_filter &lt;- salarydata |&gt; filter(ethnicity != "Total")
+??salarydata
+
+#To create a graph that shows how are women and man pay across racial groups
+
+ ggplot(salary_data_filter, mapping = aes (x = Year, y = salary, group = gender,
+                                   color = gender)) +
+   geom_line()+
+   geom_point()+
+   facet_wrap(~ethnicity) +
+   labs(title = "Gender Pay Gap Across Racial/Ethnic Groups in the U.S. Over Time 1988 to 2023",
+        y = "Salary",
+        x = "Year", color = "Gender")+
+   theme_minimal()
+
+ggplot(salary_data_filter, mapping = aes( x= Year, y = salary,
+                                          color=gender))+
+  geom_line()+
+  geom_point()+
+  facet_wrap(~ethnicity)
+
+# To create a filter of Non White Males vs White women 
+
+salarydata_whitewomen &lt;- salary_data_filter |&gt; filter((
+  gender == "Men" &amp; ethnicity != "White") | (
+    gender == "Women" &amp; ethnicity == "White"))
+
+# The creation of the plot of the comparison
+
+ggplot(salarydata_whitewomen, aes(
+  x=Year, y=salary, color = interaction(gender, ethnicity)))+
+  geom_line()+
+  geom_point()+
+  labs(title = "Salary Comparison: Men (Non-White) vs White Women", x = "Year",
+       y = "Salary", color = "Gender &amp; Race/Ethnicity")+
+  theme_linedraw()
+
+#To create a filter of Women only
+
+salarydata_women &lt;- salary_data_filter |&gt; filter(gender == "Women")
+salarydata_women
+
+#To create a filter of Men only
+
+salarydata_men &lt;- salary_data_filter |&gt; filter(gender == "Men")
+salarydata_men
+
+#To create a plot for women pay gap across groups 
+
+ggplot(salarydata_women, aes(
+  x = Year, y = salary, color = ethnicity))+
+  geom_line()+
+  geom_point()+
+  labs(title ="Race/Ethnicity Pay Gap Within Women", x = "Year", y = "Salary",
+       color = "Race/Ethnicity")+
+  theme_linedraw()
+
+#To make a graph to show the pay gap within men 
+
+ggplot(salarydata_men, aes(
+  x = Year, y = salary, color = ethnicity))+
+  geom_line()+
+  geom_point()+
+  labs(title ="Race/Ethnicity Pay Gap Within Men", x = "Year", y = "Salary",
+       color = "Race/Ethnicity")+
+  theme_linedraw()
+
+
+# To create a filter of Men vs Asian women 
+
+salarydata_asianwomen &lt;- salary_data_filter |&gt; filter((
+  gender == "Men") | (
+    gender == "Women" &amp; ethnicity == "Asian"))
+
+# The creation of the plot of the comparison
+
+ggplot(salarydata_asianwomen, aes(
+  x=Year, y=salary, color = interaction(gender, ethnicity)))+
+  geom_line()+
+  geom_point()+
+  labs(title = "Salary Comparison: Men vs Asian Women", x = "Year",
+       y = "Salary", color = "Gender &amp; Race/Ethnicity")+
+  theme_linedraw()
+  
+  </code></pre>
+<p><img src="../../Overall_Graph_Across_All_Groups.png" class="img-fluid"> x = Year, y = salary, color = ethnicity))+ geom_line()+ geom_point()+ labs(title =“Race/Ethnicity Pay Gap Within Men”, x = “Year”, y = “Salary”, color = “Race/Ethnicity”)+ theme_linedraw()</p>
+<p>This graph allow us to see that across all racial/ethnic groups men still earn higher than women. It also allows us to see that compare to the other race/ethnicity Asian men tend to earn higher than everyone else.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../Race_Ethnicity_Pay_Gap_Women.png" class="img-fluid figure-img"></p>
+<figcaption>Race/Ethnicity Wage Gap between Women</figcaption>
+</figure>
+</div>
+<p>This graphs allow us to see that across all racial/ethnic groups of just women. It allow us to see that Asian women earn higher compared to the rest of women within each of their race/ethnicity group.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../RaceEthnicity_paygap_Men.png" class="img-fluid figure-img"></p>
+<figcaption>Race/Ethnicity Wage Gap between Men</figcaption>
+</figure>
+</div>
+<p>This graphs allow us to see that across all racial/ethnic groups of just men. It allow us to see that Asian men earn higher compared to the rest of men within each of their race/ethnicity group.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../SalaryComparison_NonWhiteMen_WhiteWomen.png" class="img-fluid figure-img"></p>
+<figcaption>Salary Comparision between Non White Man and White Women</figcaption>
+</figure>
+</div>
+<p>This graph allow us to see that fro the past decade White women median salary has been increasing to be higher than Black men and Hispanic men but the there is still a big gap between Asian men.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../Salary_Comparison_Men_AsianWomen.png" class="img-fluid figure-img"></p>
+<figcaption>Salary Comparision between Men and Asian Women</figcaption>
+</figure>
+</div>
+<p>I decided to create this graph after the first graph, since it made me realize that at some point Asian women have earned higher than White men, this graph goes into detail to see this comparison. As we can see Asian man still earn higher than everyone else but Asian women have started to earn higher than White man since 2020.</p>
+</section>
+</section>
+<section id="discussion" class="level1">
+<h1>Discussion</h1>
+<p>The data allow for me to be able to create different types in order for me to be able to answer my initial question of whether man earn higher across all racial/ethnic groups. Across the findings we were able to see that yes, man earn higher than women across all racial/ethnic groups but to my surprise I was able to find that Asian men and Asian women earn higher than White man. This was surprising to me since I would always hear White man earning higher across all racial and ethnic groups and women.</p>
 
 
 </section>
